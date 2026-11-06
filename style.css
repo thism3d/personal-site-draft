@@ -216,6 +216,7 @@ html.sketch section.about { --bg: var(--cream); }
 .p-idea svg { filter: url(#pencil); }
 .p-idea svg * { fill: none !important; stroke: var(--pencil) !important; stroke-width: 2.4 !important; stroke-linecap: round; }
 .p-idea svg .p-bg { stroke: none !important; }
+.p-idea svg .solid { fill: var(--cream) !important; }
 .p-idea .guide { display: block; opacity: .4; }
 .p-idea svg .guide * { stroke-width: 1.2 !important; stroke-dasharray: 5 6; }
 html.sketch .pframe { --x: 100% !important; }
