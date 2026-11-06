@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Mara Vale: designer, UI/UX, developer</title>
+<meta name="description" content="Designer, UI/UX designer and developer. I take your idea from imagination to launch.">
+<meta name="theme-color" content="#4a0813">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,400..800&family=Caveat:wght@500;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<!-- The pencil: everything in "idea" state runs through this wobble. -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <filter id="pencil"><feTurbulence type="fractalNoise" baseFrequency=".035" numOctaves="2" seed="4"/><feDisplacementMap in="SourceGraphic" scale="3.2"/></filter>
+</svg>
+
+<header class="top">
+  <div class="wrap bar">
+    <a class="brand" href="#hero"><span class="mark">MV</span>Mara Vale</a>
+    <nav class="links" aria-label="Main">
+      <a href="#lenses">What I do</a><a href="#work">Work</a><a href="#path">How it moves</a><a href="#about">About</a>
+    </nav>
+    <button class="mode" id="mode" type="button" aria-pressed="false"><span class="dot"></span><span class="mode-label">Sketch mode</span></button>
+    <a class="btn small solid" href="#idea">Start a project</a>
+  </div>
+</header>
+
+<main>
+  <section class="hero" id="hero">
+    <div class="layer real" id="real">
+      <div class="wrap hero-grid">
+        <div class="hero-copy">
+          <p class="eyebrow"><span class="pulse"></span> Designer · UI/UX · Developer</p>
+          <h1>Imagination,<br><em>visualised.</em></h1>
+          <p class="lead">Ideas don't ship themselves. I design it, shape how it feels, build it and launch it. One person, no hand-offs, and your project moving every week.</p>
+          <div class="cta">
+            <a class="btn solid" href="#idea">Move my project forward</a>
+            <a class="btn ghost" href="#work">See the work</a>
+          </div>
+        </div>
+
+        <div class="device" aria-hidden="true">
+          <div class="phone">
+            <div class="notch"></div>
+            <div class="screen">
+              <p class="s-label">Your project</p>
+              <p class="s-big">86<small>%</small></p>
+              <p class="s-sub">of the way to launch</p>
+              <div class="s-bar"><i></i></div>
+              <ul class="s-list">
+                <li class="done"><b></b>The idea</li>
+                <li class="done"><b></b>The look</li>
+                <li class="done"><b></b>The journey</li>
+                <li class="now"><b></b>The build</li>
+                <li><b></b>Launch day</li>
+              </ul>
+              <div class="s-btn">Keep moving</div>
+            </div>
+          </div>
+          <span class="note n1">big friendly number!!</span>
+          <span class="note n2">thumb lands here →</span>
+          <span class="note n3">does this feel fast?</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- js clones .real into .idea so the sketch can never drift from the finished page. -->
+    <div class="layer idea sketchy" id="idea-layer" aria-hidden="true"></div>
+
+    <div class="split" id="split">
+      <span class="tag tag-l">idea</span>
+      <button class="grip" id="grip" type="button" role="slider" aria-label="Move between idea and finished design" aria-valuemin="0" aria-valuemax="100" aria-valuenow="38">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6 3 12l6 6M15 6l6 6-6 6"/></svg>
+      </button>
+      <span class="tag tag-r">real</span>
+    </div>
+  </section>
+
+  <section class="paper" id="lenses">
+    <div class="wrap">
+      <div class="head reveal">
+        <p class="eyebrow">Designer. UI/UX. Developer.</p>
+        <h2>Three jobs. <br>One person.</h2>
+        <p class="lead">No hand-offs. No lost details. Here's one button, seen through all three.</p>
+      </div>
+
+      <div class="lens reveal">
+        <div class="lens-tabs" role="tablist" aria-label="Three ways to see one button">
+          <button role="tab" id="t-design" aria-controls="p-design" aria-selected="true"><b>01</b>Designer<small>How it looks</small></button>
+          <button role="tab" id="t-ux" aria-controls="p-ux" aria-selected="false" tabindex="-1"><b>02</b>UI/UX<small>How it feels to use</small></button>
+          <button role="tab" id="t-dev" aria-controls="p-dev" aria-selected="false" tabindex="-1"><b>03</b>Developer<small>How it really works</small></button>
+        </div>
+
+        <div class="lens-stage">
+          <div class="panel" id="p-design" role="tabpanel" aria-labelledby="t-design">
+            <div class="spec">
+              <span class="spec-btn">Book a call<i class="m m-h">56 px</i><i class="m m-r">14 px radius</i></span>
+              <div class="swatches"><span style="--c:#4a0813">#4A0813</span><span style="--c:#7a1022">#7A1022</span><span style="--c:#f5efe4;--t:#4a0813">#F5EFE4</span></div>
+              <p class="aa">Aa<small>Bricolage Grotesque. Tight, heavy, loud.</small></p>
+            </div>
+          </div>
+          <div class="panel" id="p-ux" role="tabpanel" aria-labelledby="t-ux" hidden>
+            <div class="flow">
+              <div class="step"><span>1</span>Sees the offer</div>
+              <div class="step"><span>2</span>Picks a time</div>
+              <div class="step"><span>3</span>Booked</div>
+              <i class="tap"></i>
+            </div>
+            <p class="flow-note">Three taps. No account. If someone stops halfway, the design failed, not them.</p>
+          </div>
+          <div class="panel" id="p-dev" role="tabpanel" aria-labelledby="t-dev" hidden>
+<pre class="code" tabindex="0"><code><span class="c">/* This is the actual line behind the
+   slider at the top of this page. */</span>
+<span class="k">.idea</span> {
+  <span class="p">clip-path</span>: inset(0 calc(100% - <span class="v">var(--x)</span>) 0 0);
+}
+
+<span class="c">// Your finger moves it. That's the trick.</span>
+hero.style.setProperty(<span class="s">'--x'</span>, x + <span class="s">'%'</span>);</code></pre>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="wine" id="work">
+    <div class="wrap">
+      <div class="head reveal">
+        <p class="eyebrow">Work</p>
+        <h2>Things that left <br>the sketchbook.</h2>
+      </div>
+      <!-- Placeholders: swap in real projects. -->
+      <div class="grid">
+        <article class="tile one reveal"><div><h3>Project one</h3><p>One line on what it is and who it helped.</p><span>Your project here</span></div></article>
+        <article class="tile two-up reveal"><div><h3>Project two</h3><p>One line on what it is.</p><span>Your project here</span></div></article>
+        <article class="tile three reveal"><div><h3>Project three</h3><p>One line on what it is.</p><span>Your project here</span></div></article>
+        <a class="tile next reveal" href="#idea"><div><h3>Yours next.</h3><p>This space is waiting.</p><span>Start a project →</span></div></a>
+      </div>
+    </div>
+  </section>
+
+  <section class="paper" id="path">
+    <div class="wrap">
+      <div class="head reveal">
+        <p class="eyebrow">How it moves</p>
+        <h2>Your project moves. <br>Every week.</h2>
+      </div>
+      <ol class="path" id="path-list">
+        <li class="reveal"><b>Spark</b><p>We talk. You leave with a clear one-page plan.</p></li>
+        <li class="reveal"><b>Sketch</b><p>Rough screens, fast. Bad ideas die early and cheap.</p></li>
+        <li class="reveal"><b>Shape</b><p>The real look, the real journey. Tap through it before a line is built.</p></li>
+        <li class="reveal"><b>Ship</b><p>I build it. I launch it. I stay for what comes next.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="wine about" id="about">
+    <div class="wrap two">
+      <!-- Stand-in portrait. js clones the svg into .p-idea and the css turns it to pencil. -->
+      <div class="pframe reveal" id="pframe">
+        <div class="p-real" id="p-real">
+          <svg viewBox="0 0 400 480" role="img" aria-label="Drawn portrait">
+            <rect class="p-bg" width="400" height="480" fill="#7a1022"/>
+            <g class="guide">
+              <circle cx="200" cy="190" r="104"/><path d="M200 60v270M84 186h232M108 232h184"/>
+              <path d="M70 372l60-34M96 398l80-46M238 350l74 40M262 340l58 32"/>
+            </g>
+            <path d="M34 480c6-92 62-136 124-146h84c62 10 118 54 124 146z" fill="#f5efe4"/>
+            <path d="M160 268h80v62c0 26-80 26-80 0z" fill="#d9c9bb"/>
+            <path d="M118 182c0-62 36-98 82-98s82 36 82 98c0 66-40 118-82 118s-82-52-82-118z" fill="#f5efe4"/>
+            <path d="M104 196c-10-92 40-136 104-132 62 4 100 54 88 130-8-30-22-52-40-64-46 22-104 18-130 8-12 14-18 34-22 58z" fill="#2c050c"/>
+            <path d="M146 180c10-7 26-7 36 0M218 180c10-7 26-7 36 0" fill="none" stroke="#2c050c" stroke-width="6" stroke-linecap="round"/>
+            <circle cx="164" cy="200" r="7" fill="#2c050c"/><circle cx="236" cy="200" r="7" fill="#2c050c"/>
+            <path d="M200 206c-6 16-10 26-8 30 2 3 10 3 14 2" fill="none" stroke="#2c050c" stroke-width="4" stroke-linecap="round"/>
+            <path d="M172 258c16 12 40 12 56 0" fill="none" stroke="#7a1022" stroke-width="6" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="p-idea sketchy" id="p-idea" aria-hidden="true"></div>
+        <div class="split">
+          <span class="tag tag-l">idea</span>
+          <button class="grip" id="p-grip" type="button" role="slider" aria-label="Move between pencil sketch and finished portrait" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6 3 12l6 6M15 6l6 6-6 6"/></svg>
+          </button>
+          <span class="tag tag-r">real</span>
+        </div>
+      </div>
+      <div class="reveal">
+        <p class="eyebrow">Who's holding the pencil</p>
+        <h2>I start where <br>the page is blank.</h2>
+        <p class="lead">I'm Mara. I draw things that don't exist yet, then I build them. Hire me and the person who sketched it is the person who ships it.</p>
+        <ul class="facts">
+          <li>Odd fact one</li><li>Odd fact two</li><li>Odd fact three</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="wine contact" id="idea">
+    <div class="wrap two">
+      <div class="reveal">
+        <p class="eyebrow">Your turn</p>
+        <h2>One sentence <br>is enough.</h2>
+        <form id="idea-form">
+          <label for="idea-text">What's the idea?</label>
+          <input id="idea-text" maxlength="90" autocomplete="off" placeholder="An app that tells me when my bus is lying">
+          <button class="btn solid" type="submit">Send me this idea</button>
+        </form>
+      </div>
+      <div class="cards reveal" aria-hidden="true">
+        <div class="ticket sketchy"><small>your idea, today</small><p class="i-text"></p></div>
+        <div class="ticket done"><small>your idea, soon</small><p class="i-text"></p></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap foot">
+    <span>Version 1, November 2026. This site gets a new coat every year.</span>
+    <span id="width" aria-live="off"></span>
+  </div>
+</footer>
+<script src="main.js"></script>
+</body>
+</html>
