@@ -47,14 +47,14 @@
             <div class="notch"></div>
             <div class="screen">
               <p class="s-label">Your project</p>
-              <p class="s-big">86<small>%</small></p>
+              <p class="s-big"><span class="pct">62</span><small>%</small></p>
               <p class="s-sub">of the way to launch</p>
               <div class="s-bar"><i></i></div>
-              <ul class="s-list">
-                <li class="done"><b></b>The idea</li>
-                <li class="done"><b></b>The look</li>
-                <li class="done"><b></b>The journey</li>
-                <li class="now"><b></b>The build</li>
+              <ul class="s-list" data-steps>
+                <li><b></b>The idea</li>
+                <li><b></b>The look</li>
+                <li><b></b>The journey</li>
+                <li><b></b>The build</li>
                 <li><b></b>Launch day</li>
               </ul>
               <div class="s-btn">Keep moving</div>
@@ -72,7 +72,7 @@
 
     <div class="split" id="split">
       <span class="tag tag-l">idea</span>
-      <button class="grip" id="grip" type="button" role="slider" aria-label="Move between idea and finished design" aria-valuemin="0" aria-valuemax="100" aria-valuenow="38">
+      <button class="grip" id="grip" type="button" role="slider" aria-label="Move between idea and finished design" aria-valuemin="2" aria-valuemax="98" aria-valuenow="38">
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6 3 12l6 6M15 6l6 6-6 6"/></svg>
       </button>
       <span class="tag tag-r">real</span>
@@ -173,7 +173,7 @@ hero.style.setProperty(<span class="s">'--x'</span>, x + <span class="s">'%'</sp
             <path d="M118 182c0-62 36-98 82-98s82 36 82 98c0 66-40 118-82 118s-82-52-82-118z" fill="#f5efe4"/>
             <path d="M104 196c-10-92 40-136 104-132 62 4 100 54 88 130-8-30-22-52-40-64-46 22-104 18-130 8-12 14-18 34-22 58z" fill="#2c050c"/>
             <path d="M146 180c10-7 26-7 36 0M218 180c10-7 26-7 36 0" fill="none" stroke="#2c050c" stroke-width="6" stroke-linecap="round"/>
-            <circle cx="164" cy="200" r="7" fill="#2c050c"/><circle cx="236" cy="200" r="7" fill="#2c050c"/>
+            <circle class="eye" cx="164" cy="200" r="7" fill="#2c050c"/><circle class="eye" cx="236" cy="200" r="7" fill="#2c050c"/>
             <path d="M200 206c-6 16-10 26-8 30 2 3 10 3 14 2" fill="none" stroke="#2c050c" stroke-width="4" stroke-linecap="round"/>
             <path d="M172 258c16 12 40 12 56 0" fill="none" stroke="#7a1022" stroke-width="6" stroke-linecap="round"/>
           </svg>
@@ -181,7 +181,7 @@ hero.style.setProperty(<span class="s">'--x'</span>, x + <span class="s">'%'</sp
         <div class="p-idea sketchy" id="p-idea" aria-hidden="true"></div>
         <div class="split">
           <span class="tag tag-l">idea</span>
-          <button class="grip" id="p-grip" type="button" role="slider" aria-label="Move between pencil sketch and finished portrait" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50">
+          <button class="grip" id="p-grip" type="button" role="slider" aria-label="Move between pencil sketch and finished portrait" aria-valuemin="2" aria-valuemax="98" aria-valuenow="50">
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6 3 12l6 6M15 6l6 6-6 6"/></svg>
           </button>
           <span class="tag tag-r">real</span>
@@ -210,7 +210,7 @@ hero.style.setProperty(<span class="s">'--x'</span>, x + <span class="s">'%'</sp
         </form>
       </div>
       <div class="cards reveal" aria-hidden="true">
-        <div class="ticket sketchy"><small>your idea, today</small><p class="i-text"></p></div>
+        <div class="ticket sketchy"><small id="idea-verdict">your idea, today</small><p class="i-text"></p></div>
         <div class="ticket done"><small>your idea, soon</small><p class="i-text"></p></div>
       </div>
     </div>
@@ -219,10 +219,11 @@ hero.style.setProperty(<span class="s">'--x'</span>, x + <span class="s">'%'</sp
 
 <footer>
   <div class="wrap foot">
-    <span>Version 1, November 2026. This site gets a new coat every year.</span>
+    <span>Version 1, November 2026. This site gets a new coat every year. <i class="psst">Psst, press S.</i></span>
     <span id="width" aria-live="off"></span>
   </div>
 </footer>
+<canvas id="trail" aria-hidden="true"></canvas>
 <script src="main.js"></script>
 </body>
 </html>
