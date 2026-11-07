@@ -51,9 +51,7 @@ h1 a { text-decoration: none; }
 .prose p { margin: 0 0 1.05em; }
 .first::first-letter { color: var(--mark); float: left; font-family: "IM Fell Double Pica SC", serif; font-size: 66px; line-height: .86; padding: 5px 7px 0 0; }
 .portrait { float: left; width: 142px; margin: 7px 20px 8px 0; border: 1px solid var(--ink); }
-.portrait svg { width: 100%; height: auto; background: var(--paper); }
-.portrait svg * { fill: var(--paper) !important; stroke: var(--ink) !important; stroke-width: 3.6 !important; stroke-linecap: round; }
-.portrait svg .p-bg { stroke: none !important; }
+.portrait img { width: 100%; height: auto; }
 
 .work { list-style: none; margin: 44px 0 0; padding: 0; }
 .work li { margin-bottom: 46px; }
