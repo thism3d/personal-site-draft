@@ -4,27 +4,279 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Nasiria Hoque: designer, UI/UX, developer</title>
-<meta name="description" content="Nasiria Hoque: designer, UI/UX designer and developer. From imagination to visualisation.">
+<meta name="description" content="Designer, UI/UX designer and developer. I take your idea from imagination to launch.">
+<meta name="theme-color" content="#4a0813">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=IM+Fell+Double+Pica+SC&family=Sorts+Mill+Goudy:ital@0;1&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400..900&family=Newsreader:ital,opsz,wght@0,6..72,300..700;1,6..72,300..700&family=Caveat:wght@500;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
-<script src="mode.js"></script>
 </head>
-<body class="home">
-<main class="col cover">
-    <h1><span>Nasiria</span> <span>Hoque</span></h1>
-    <p class="sub">Designer, UI/UX, Developer</p>
-    <ol class="contents">
-      <li><a href="about/"><span>About</span><i></i><b>I</b></a></li>
-      <li><a href="work/"><span>Work</span><i></i><b>II</b></a></li>
-      <li><a href="process/"><span>Process</span><i></i><b>III</b></a></li>
-      <li><a href="contact/"><span>Contact</span><i></i><b>IV</b></a></li>
-    </ol>
-    <div class="colophon">
-      <p class="version"><small>v.</small> I</p>
-      <button class="mode" id="mode" type="button" aria-label="Switch between day and night"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v3M12 18.5v3M2.5 12h3M18.5 12h3M5.3 5.3l2.1 2.1M16.6 16.6l2.1 2.1M18.7 5.3l-2.1 2.1M7.4 16.6l-2.1 2.1"/></svg></button>
+<body>
+<!-- The pencil: everything in "idea" state runs through this wobble. -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <filter id="pencil"><feTurbulence type="fractalNoise" baseFrequency=".035" numOctaves="2" seed="4"/><feDisplacementMap in="SourceGraphic" scale="3.2"/></filter>
+  <filter id="rough"><feTurbulence type="fractalNoise" baseFrequency=".12" numOctaves="2" seed="9"/><feDisplacementMap in="SourceGraphic" scale="1"/></filter>
+</svg>
+
+<header class="top">
+  <div class="wrap bar">
+    <a class="brand" href="#hero"><span class="mark">NH</span>Nasiria Hoque</a>
+    <nav class="links" aria-label="Main">
+      <a href="#lenses">What I do</a><a href="#work">Work</a><a href="#path">How it moves</a><a href="#about">About</a>
+    </nav>
+    <button class="sound-btn" id="sound" type="button" aria-pressed="false" title="Sound"><i aria-hidden="true"><b></b><b></b><b></b></i><span>Sound</span></button>
+    <button class="mode" id="mode" type="button" aria-pressed="false"><span class="dot"></span><span class="mode-label">Sketch mode</span></button>
+    <a class="btn small solid" href="#idea">Start a project</a>
+  </div>
+</header>
+
+<main>
+  <section class="hero" id="hero">
+    <div class="layer real" id="real">
+      <div class="wrap hero-grid">
+        <div class="hero-copy">
+          <p class="eyebrow"><span class="pulse"></span> Designer · UI/UX · Developer</p>
+          <h1>Imagination,<br><em>visualised.</em></h1>
+          <p class="lead">Ideas don't ship themselves. I design it, shape how it feels, build it and launch it. One person, no hand-offs, and your project moving every week.</p>
+          <div class="cta">
+            <a class="btn solid" href="#idea">Move my project forward</a>
+            <a class="btn ghost" href="#work">See the work</a>
+          </div>
+        </div>
+
+        <div class="device" aria-hidden="true">
+          <div class="phone">
+            <div class="notch"></div>
+            <div class="screen">
+              <p class="s-label">Your project</p>
+              <p class="s-big"><span class="pct">62</span><small>%</small></p>
+              <p class="s-sub">of the way to launch</p>
+              <div class="s-bar"><i></i></div>
+              <ul class="s-list" data-steps>
+                <li><b></b>The idea</li>
+                <li><b></b>The look</li>
+                <li><b></b>The journey</li>
+                <li><b></b>The build</li>
+                <li><b></b>Launch day</li>
+              </ul>
+              <div class="s-btn">Keep moving</div>
+            </div>
+          </div>
+          <span class="note n1">big friendly number!!</span>
+          <span class="note n2">thumb lands here →</span>
+          <span class="note n3">does this feel fast?</span>
+        </div>
+      </div>
     </div>
-  </main>
+
+    <!-- js clones .real into .idea so the sketch can never drift from the finished page. -->
+    <div class="layer idea sketchy" id="idea-layer" aria-hidden="true"></div>
+
+    <div class="split" id="split">
+      <span class="tag tag-l">idea</span>
+      <button class="grip" id="grip" type="button" role="slider" aria-label="Move between idea and finished design" aria-valuemin="2" aria-valuemax="98" aria-valuenow="38">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6 3 12l6 6M15 6l6 6-6 6"/></svg>
+      </button>
+      <span class="tag tag-r">real</span>
+    </div>
+  </section>
+
+  <section class="paper" id="lenses">
+    <div class="wrap">
+      <div class="head reveal">
+        <p class="eyebrow">Designer. UI/UX. Developer.</p>
+        <h2>Three jobs. <br>One person.</h2>
+        <p class="lead">No hand-offs. No lost details. Here's one button, seen through all three.</p>
+      </div>
+
+      <div class="lens reveal">
+        <div class="lens-tabs" role="tablist" aria-label="Three ways to see one button">
+          <button role="tab" id="t-design" aria-controls="p-design" aria-selected="true"><b>01</b>Designer<small>How it looks</small></button>
+          <button role="tab" id="t-ux" aria-controls="p-ux" aria-selected="false" tabindex="-1"><b>02</b>UI/UX<small>How it feels to use</small></button>
+          <button role="tab" id="t-dev" aria-controls="p-dev" aria-selected="false" tabindex="-1"><b>03</b>Developer<small>How it really works</small></button>
+        </div>
+
+        <div class="lens-stage">
+          <div class="panel" id="p-design" role="tabpanel" aria-labelledby="t-design">
+            <div class="spec">
+              <span class="spec-btn">Send your idea<i class="m m-h">56 px</i><i class="m m-r">14 px radius</i></span>
+              <div class="swatches"><span style="--c:#4a0813">#4A0813</span><span style="--c:#7a1022">#7A1022</span><span style="--c:#0c0a0a">#0C0A0A</span></div>
+              <p class="aa">Aa<small>Heavy, rough, a little antique. Loud on purpose.</small></p>
+            </div>
+          </div>
+          <div class="panel" id="p-ux" role="tabpanel" aria-labelledby="t-ux" hidden>
+            <div class="flow">
+              <div class="step"><span>1</span>Sees the work</div>
+              <div class="step"><span>2</span>Shares the idea</div>
+              <div class="step"><span>3</span>Gets a plan</div>
+              <i class="tap"></i>
+            </div>
+            <p class="flow-note">Three taps. No account. If someone stops halfway, the design failed, not them.</p>
+          </div>
+          <div class="panel" id="p-dev" role="tabpanel" aria-labelledby="t-dev" hidden>
+<pre class="code" tabindex="0"><code><span class="c">/* This is the actual line behind the
+   slider at the top of this page. */</span>
+<span class="k">.idea</span> {
+  <span class="p">clip-path</span>: inset(0 calc(100% - <span class="v">var(--x)</span>) 0 0);
+}
+
+<span class="c">// Your finger moves it. That's the trick.</span>
+hero.style.setProperty(<span class="s">'--x'</span>, x + <span class="s">'%'</span>);</code></pre>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="wine" id="work">
+    <div class="wrap">
+      <div class="head reveal">
+        <p class="eyebrow">Work</p>
+        <h2>Things that left <br>the sketchbook.</h2>
+      </div>
+      <!-- Placeholders: swap in real projects. -->
+      <div class="grid">
+        <a class="tile one shayi reveal" href="https://shayimasters.com/" rel="noopener">
+          <video class="side" autoplay muted loop playsinline disablepictureinpicture preload="metadata" poster="media/shayi-boxes.webp" aria-label="The Shayi Masters boxes turning past, one after another"><source src="media/shayi-boxes.mp4" type="video/mp4"></video>
+          <span class="boxes">
+            <img class="elephant" src="img/shayi-elephant.webp" alt="Shayi Masters Africa's Special Tea box, yellow with an elephant" loading="lazy">
+            <img class="lion" src="img/shayi-lion.webp" alt="Shayi Masters Power Tea for Men box, golden with a lion" loading="lazy">
+          </span>
+          <div><h3>Shayi Masters</h3><p>Packaging design for a tea brand: Power Tea for Men and Africa's Special Tea.</p><span>shayimasters.com ↗</span></div>
+        </a>
+        <a class="tile two-up go reveal" href="https://go.vesopa.com/" rel="noopener">
+          <span class="status"><i></i>Running · in testing on Google Play and the App Store</span>
+          <span class="scene" role="img" aria-label="Vesopa Go: a card tapping a phone to pay £24.50">
+            <span class="scene-in">
+              <span class="lockup"><img src="img/go-mark.png" alt="" width="40" height="40"><b>Vesopa <em>Go</em></b></span>
+              <span class="tphone"><small>TAP TO PAY</small><strong>£24.50</strong><i class="nfc"></i></span>
+              <span class="waves"><i></i><i></i></span>
+              <span class="tcard"><i></i><small>···· 4242</small></span>
+            </span>
+          </span>
+          <div><h3>Vesopa Go</h3><p>The till in your hand: tables, kitchen and payments on phone and tablet.</p><span>go.vesopa.com ↗</span></div>
+        </a>
+        <article class="tile three social reveal">
+          <span class="status"><i></i>Finished</span>
+          <svg class="plate-art" viewBox="0 0 460 280" role="img" aria-label="An engraved plate for arekpm.ca: three small post panels and the words social media and designs">
+          <defs>
+            <pattern id="hatch" width="5" height="5" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><path d="M0 0v5"/></pattern>
+            <pattern id="cross" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><path d="M0 0v6M0 0h6"/></pattern>
+            <pattern id="stipple" width="6" height="6" patternUnits="userSpaceOnUse"><circle cx="1.5" cy="1.5" r=".8" class="dot"/><circle cx="4.5" cy="4.5" r=".8" class="dot"/></pattern>
+          </defs>
+          <rect x="10" y="10" width="440" height="260"/>
+          <rect x="17" y="17" width="426" height="246" class="thin"/>
+          <path d="M10 44h7M10 236h7M443 44h7M443 236h7M44 10v7M416 10v7M44 263v7M416 263v7" class="thin"/>
+          <text x="230" y="70" class="pname">arekpm.ca</text>
+          <path d="M120 82h90M250 82h90M230 77l5 5-5 5-5-5z" class="thin"/>
+          <rect x="106" y="96" width="84" height="84" fill="url(#hatch)" style="--pat:url(#hatch)"/><rect x="106" y="96" width="84" height="84"/><path d="M148 195c-3.4-4.6-9.4-1-7 3.6 1.6 3 5 5.4 7 7 2-1.6 5.4-4 7-7 2.4-4.6-3.6-8.2-7-3.6z"/><rect x="188" y="96" width="84" height="84" fill="url(#cross)" style="--pat:url(#cross)"/><rect x="188" y="96" width="84" height="84"/><path d="M230 195c-3.4-4.6-9.4-1-7 3.6 1.6 3 5 5.4 7 7 2-1.6 5.4-4 7-7 2.4-4.6-3.6-8.2-7-3.6z"/><rect x="270" y="96" width="84" height="84" fill="url(#stipple)" style="--pat:url(#stipple)"/><rect x="270" y="96" width="84" height="84"/><path d="M312 195c-3.4-4.6-9.4-1-7 3.6 1.6 3 5 5.4 7 7 2-1.6 5.4-4 7-7 2.4-4.6-3.6-8.2-7-3.6z"/>
+          <text x="230" y="241" class="pcap">Social Media &amp; Designs</text>
+        </svg>
+          <div><h3>arekpm.ca</h3><p>Social media management and designs.</p>
+            <span class="links-row"><a href="https://www.facebook.com/arekpm.ca" rel="noopener">Facebook ↗</a><a href="https://www.instagram.com/arekpm.ca" rel="noopener">Instagram ↗</a></span>
+          </div>
+        </article>
+        <a class="tile next reveal" href="#idea"><div><h3>Yours next.</h3><p>This space is waiting.</p><span>Start a project →</span></div></a>
+      </div>
+    </div>
+  </section>
+
+  <section class="paper" id="path">
+    <div class="wrap">
+      <div class="head reveal">
+        <p class="eyebrow">How it moves</p>
+        <h2>Your project moves. <br>Every week.</h2>
+      </div>
+      <ol class="path" id="path-list">
+        <li class="reveal"><b>Spark</b><p>You send the idea. You get a clear one-page plan back.</p></li>
+        <li class="reveal"><b>Sketch</b><p>Rough screens, fast. Bad ideas die early and cheap.</p></li>
+        <li class="reveal"><b>Shape</b><p>The real look, the real journey. Tap through it before a line is built.</p></li>
+        <li class="reveal"><b>Ship</b><p>I build it. I launch it. I stay for what comes next.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="wine about" id="about">
+    <div class="wrap">
+      <div class="two">
+        <div class="pframe reveal" id="pframe">
+          <div class="p-real"><img src="img/nasiria.webp" alt="Nasiria Hoque" width="400" height="480"></div>
+          <div class="p-idea sketchy" aria-hidden="true"><img src="img/nasiria-sketch.webp" alt="" width="400" height="480"></div>
+          <div class="split">
+            <span class="tag tag-l">idea</span>
+            <button class="grip" id="p-grip" type="button" role="slider" aria-label="Move between chalk sketch and photo" aria-valuemin="2" aria-valuemax="98" aria-valuenow="50">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6 3 12l6 6M15 6l6 6-6 6"/></svg>
+            </button>
+            <span class="tag tag-r">real</span>
+          </div>
+        </div>
+        <div class="reveal">
+          <p class="eyebrow">Who's holding the pencil</p>
+          <h2>A Journey of Transformation, Curiosity &amp; Ambition</h2>
+        </div>
+      </div>
+      <div class="story reveal">
+      <p>I was once the quiet girl who struggled to make friends, even well into primary school. Introverted by nature, I gradually transformed into an impulsive, rebellious teenager who often found herself caught between youthful curiosity, family disagreements, and an overwhelming desire to experience life on her own terms.</p>
+      <p>For a long time, I lived without much consideration for the future. I enjoyed my childhood, embraced my freedom, and relied on the financial stability my parents had worked hard to provide. Eventually, I moved to a boarding school, where I continued navigating life with little understanding of the responsibilities that awaited me.</p>
+      <p>Then came COVID-19, and with it, an unexpected turning point. My father's financial circumstances changed dramatically, and the stability I had always taken for granted was no longer certain. Being the eldest child, I began to understand that life was no longer simply about enjoying the present. Responsibility became inevitable, and ambition slowly replaced carelessness.</p>
+      <p>I returned to live with my parents, continued my education, and started approaching life with a completely different mindset. Somewhere along that journey, I discovered the world of technology.</p>
+      <p>It was an entirely new universe — one far greater, more complex, and more fascinating than anything I had previously imagined. I began with graphic design, progressed into UI/UX design, explored web development, and eventually immersed myself in the rapidly evolving world of artificial intelligence.</p>
+      <p>Every new discipline opened another door. Every challenge introduced another possibility. I discovered that I genuinely loved creating things, understanding how technology works, and transforming abstract ideas into tangible experiences.</p>
+      <p>I was still the same curious, chaotic, occasionally overthinking girl, but I was gradually becoming someone with direction.</p>
+      <p>My journey took another unexpected turn while I was studying in China. Discovering that I was pregnant changed my perception of life in ways I could never have anticipated. It was a transformation I had never planned for, yet motherhood gave my ambitions an entirely new meaning.</p>
+      <p>Today, I approach my work with a different kind of determination. I am no longer learning simply because I am curious; I am building because I have a purpose beyond myself. My child has become one of my greatest motivations, inspiring me to create opportunities, pursue excellence, and work towards providing a life filled with comfort, opportunity, and privilege.</p>
+      <p>I genuinely enjoy what I do. Learning something new, developing an idea, experimenting with technology, and building something from nothing have become integral parts of my everyday life. I do not consider myself someone who has reached the destination. I am still evolving, still exploring, and still discovering what I am capable of achieving.</p>
+      <p>My professional journey has also introduced me to people and opportunities across international markets, including Bangladesh, Canada, China, and Africa. Collaborating across different environments has broadened my perspective and strengthened my desire to establish meaningful professional relationships with companies around the world. I am currently expanding this journey through my collaboration with a professional based in Wales, United Kingdom.</p>
+      <p>I believe my story is not about becoming a completely different person. It is about discovering what I was capable of becoming.</p>
+      <p>From an introverted little girl to a mother, creative thinker, technology enthusiast, and aspiring global professional, my journey continues to evolve.</p>
+      <p>I have ambitions beyond borders, ideas beyond limitations, and an endless appetite for learning.</p>
+      <p>And perhaps the most exciting part is that I am only getting started.</p>
+      </div>
+      <section class="reason">
+        <h2>My Reason to Live.<br>My Reason to Build.</h2>
+        <div class="film"><iframe src="https://www.youtube-nocookie.com/embed/CMpZy2HSE0U?rel=0" title="My Reason to Live. My Reason to Build." loading="lazy" allow="encrypted-media; picture-in-picture; fullscreen" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe></div>
+        <p>Aishi this message for you my baby</p>
+        <p>Mamma loves you more than words can ever express. You changed my world in an instant and gave my life a whole new purpose.</p>
+        <p class="watch"><a href="https://youtu.be/CMpZy2HSE0U" rel="noopener">Watch on YouTube</a></p>
+      </section>
+    </div>
+  </section>
+
+  <section class="wine contact" id="idea">
+    <div class="wrap two">
+      <div class="reveal">
+        <p class="eyebrow">Your turn</p>
+        <h2>One sentence <br>is enough.</h2>
+        <form id="idea-form">
+          <label for="idea-text">What's the idea?</label>
+          <input id="idea-text" maxlength="90" autocomplete="off" placeholder="An app that tells me when my bus is lying">
+          <button class="btn solid" type="submit">Send me this idea</button>
+        </form>
+        <div class="reach">
+          <a class="mail" href="mailto:nasiriahaque@icloud.com">nasiriahaque@icloud.com</a>
+          <span class="socials">
+            <a href="https://www.facebook.com/share/19t5wa8hsp/" rel="noopener">Facebook</a>
+            <a href="https://www.instagram.com/nasiriahoque" rel="noopener">Instagram</a>
+            <a href="https://x.com/inashaque" rel="noopener">X</a>
+            <a href="https://www.linkedin.com/in/nasiria-haque-21aa02449" rel="noopener">LinkedIn</a>
+          </span>
+        </div>
+      </div>
+      <div class="cards reveal" aria-hidden="true">
+        <div class="ticket sketchy"><small id="idea-verdict">your idea, today</small><p class="i-text"></p></div>
+        <div class="ticket done"><small>your idea, soon</small><p class="i-text"></p></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap foot">
+    <span>Version 1, November 2026. This site gets a new coat every year. <i class="psst">Psst, press S.</i></span>
+    <span id="width" aria-live="off"></span>
+  </div>
+</footer>
+<canvas id="trail" aria-hidden="true"></canvas>
+<script src="main.js"></script>
 </body>
 </html>
