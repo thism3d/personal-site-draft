@@ -191,14 +191,50 @@ html.sketch .lens-tabs [aria-selected="true"] { background: none; color: var(--m
 a.tile:hover { transform: translateY(-6px); box-shadow: var(--shadow); }
 .tile h3 { font-size: clamp(28px, 3vw, 40px); line-height: 1.05; letter-spacing: -.02em; }
 .tile p { margin: 8px 0 12px; opacity: .8; max-width: 34ch; }
-.tile span { font: 600 13px/1 "JetBrains Mono", monospace; }
-.one { grid-column: span 4; min-height: 440px; background: var(--maroon); color: var(--cream); }
-.two-up { grid-column: span 2; min-height: 440px; background: var(--wine-deep); color: var(--cream); }
+.tile span:not(.boxes):not(.posts) { font: 600 13px/1 "JetBrains Mono", monospace; }
+.one { grid-column: span 4; min-height: 520px; background: var(--maroon); color: var(--cream); }
+.two-up { grid-column: span 2; min-height: 520px; background: var(--wine-deep); color: var(--cream); }
 .three { grid-column: span 3; background: var(--cream); color: var(--wine); }
 .next { grid-column: span 3; background: none; color: var(--fg); border: 2px dashed var(--edge); }
 .next h3 { font-family: "Caveat", cursive; font-size: 58px; letter-spacing: 0; }
 html.sketch .tile { background: none; color: var(--pencil); }
 html.sketch .tile span { color: var(--maroon); }
+
+/* project: Shayi Masters */
+.shayi { justify-content: space-between; gap: 20px; }
+.boxes { position: relative; display: block; flex: 1; min-height: 300px; }
+.boxes img { position: absolute; width: 62%; transition: transform .7s var(--ease); filter: drop-shadow(0 22px 26px rgba(0, 0, 0, .4)); }
+.boxes .elephant { right: 0; top: 0; rotate: 3deg; }
+.boxes .lion { left: 0; bottom: 0; rotate: -2deg; }
+.shayi:hover .lion { transform: translate(-6px, 6px); }
+.shayi:hover .elephant { transform: translate(8px, -6px); }
+html.sketch .boxes img { filter: grayscale(1) contrast(.8) url(#pencil); }
+
+/* project: Vesopa Go */
+.go { justify-content: flex-end; }
+.go img { position: absolute; left: 50%; top: 74px; width: 62%; margin-left: -31%; rotate: 4deg; border-radius: 22px; box-shadow: 0 26px 60px rgba(0, 0, 0, .6); transition: rotate .6s var(--ease), translate .6s var(--ease); }
+.go:hover img { rotate: 1deg; translate: 0 -6px; }
+.go > div { position: relative; padding-top: 22px; margin: 0 -26px -26px; padding: 40px 26px 26px; background: linear-gradient(transparent, var(--wine-deep) 34%); }
+.tile .status { position: relative; z-index: 1; align-self: flex-start; margin-bottom: auto; display: inline-flex; align-items: center; gap: 8px; line-height: 1.35; font-size: 11.5px; font-weight: 400; }
+.status i { width: 8px; height: 8px; flex: none; border-radius: 50%; background: var(--cream); animation: pulse 2.2s infinite; }
+html.sketch .go img { filter: grayscale(1) contrast(.8) url(#pencil); }
+html.sketch .go > div { background: var(--cream); }
+html.sketch .status i { background: var(--maroon); }
+
+/* project: arekpm.ca */
+.social { display: grid; grid-template-columns: minmax(0, 1fr) 170px; grid-template-rows: auto 1fr; column-gap: 20px; align-items: end; }
+.social .status { grid-column: 1 / -1; }
+.social .status i { background: var(--maroon); animation: none; }
+.social > div { grid-column: 1; }
+.links-row { display: flex; gap: 18px; flex-wrap: wrap; }
+.links-row a { text-underline-offset: 4px; }
+.posts { grid-column: 2; grid-row: 2; display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; rotate: 3deg; transition: rotate .6s var(--ease); }
+.social:hover .posts { rotate: 0deg; }
+.posts i { aspect-ratio: 1; border-radius: 7px; background: var(--maroon); }
+.posts i:nth-child(2), .posts i:nth-child(6) { background: var(--wine-deep); }
+.posts i:nth-child(3) { background: rgba(122, 16, 34, .35); }
+.posts i:nth-child(4) { background: none; border: 1.5px dashed var(--maroon); }
+html.sketch .posts i { background: none; border: 1.5px dashed var(--pencil); }
 
 /* path */
 .path { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, 1fr); position: relative; }
@@ -286,6 +322,11 @@ footer { background: var(--wine-deep); padding: 26px 0; color: var(--cream-dim);
   h2 br { display: none; }
   .grid { grid-template-columns: 1fr; }
   .tile, .one, .two-up, .three, .next { grid-column: auto; min-height: 260px; }
+  .boxes { min-height: 230px; }
+  .social { grid-template-columns: minmax(0, 1fr) 96px; column-gap: 12px; }
+  .two-up.go { min-height: 480px; }
+  .go img { width: 54%; margin-left: -27%; }
+  .boxes img { width: 72%; }
   .path { grid-template-columns: 1fr; gap: 30px; }
   .path::before, .path::after { display: none; }
   .path li { padding: 0 0 0 40px; }
