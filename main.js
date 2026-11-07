@@ -13,6 +13,115 @@
   copy.querySelectorAll('a').forEach(a => { a.removeAttribute('href'); a.tabIndex = -1; });
   ideaLayer.append(...copy.childNodes);
 
+  /* Sound, the way go.vesopa.com does it: nothing plays until asked for. Quiet piano
+     under the page, a soft tap on what you press, a gentle chime when something lands. */
+  const sfx = (() => {
+    const btn = document.getElementById('sound');
+    const AC = window.AudioContext || window.webkitAudioContext;
+    const off = { tap() {}, chime() {}, drag() {}, ask(done) { done(); } };
+    if (!AC) { btn.hidden = true; return off; }
+    const music = new Audio('media/calm-piano.mp3');
+    music.loop = true; music.preload = 'none'; music.setAttribute('playsinline', '');
+    let ctx = null, master = null, fx = null, on = false, stopping = null, keepAlive = null, last = 0, lastStep = null;
+
+    const build = () => {
+      ctx = new AC();
+      master = ctx.createGain(); master.gain.value = 0; master.connect(ctx.destination);
+      // Through the graph so it can fade: iPhones ignore an audio element's volume.
+      ctx.createMediaElementSource(music).connect(master);
+      fx = ctx.createGain(); fx.connect(ctx.destination);
+    };
+    const tone = (freq, at, dur, vol, attack = .02) => {
+      const o = ctx.createOscillator(), g = ctx.createGain();
+      o.type = 'sine'; o.frequency.value = freq;
+      g.gain.setValueAtTime(.0001, at);
+      g.gain.exponentialRampToValueAtTime(vol, at + attack);
+      g.gain.exponentialRampToValueAtTime(.0001, at + dur);
+      o.connect(g); g.connect(fx); o.start(at); o.stop(at + dur + .05);
+    };
+    const tap = () => { if (!on) return; const t = ctx.currentTime; tone(523.25, t, .32, .05, .012); tone(784, t, .24, .018, .012); };
+    const chime = () => {
+      if (!on) return;
+      const t = ctx.currentTime;
+      if (t - last < 4) return;
+      last = t;
+      tone(659.25, t, 3.2, .06, .03); tone(987.77, t + .22, 3.2, .05, .03); tone(1318.5, t + .44, 3.4, .035, .03);
+    };
+    // One small tick for each tenth of the way, and the chime on launch.
+    const drag = x => {
+      if (!on) return;
+      const step = Math.round(x / 10);
+      if (step !== lastStep) { lastStep = step; const t = ctx.currentTime; tone(880 + (10 - step) * 40, t, .09, .018, .006); }
+      if (x <= 2.5) chime();
+    };
+    // iPhone: with the silent switch on, Safari mutes Web Audio unless media is
+    // also playing, so a looping silent clip lets the sound through.
+    const unmuteIOS = () => {
+      try { if (navigator.audioSession) navigator.audioSession.type = 'playback'; } catch (e) {}
+      if (!keepAlive) {
+        const n = 4410, b = new ArrayBuffer(44 + n * 2), v = new DataView(b);
+        const str = (o, x) => { for (let i = 0; i < x.length; i++) v.setUint8(o + i, x.charCodeAt(i)); };
+        str(0, 'RIFF'); v.setUint32(4, 36 + n * 2, true); str(8, 'WAVEfmt '); v.setUint32(16, 16, true); v.setUint16(20, 1, true);
+        v.setUint16(22, 1, true); v.setUint32(24, 44100, true); v.setUint32(28, 88200, true); v.setUint16(32, 2, true);
+        v.setUint16(34, 16, true); str(36, 'data'); v.setUint32(40, n * 2, true);
+        keepAlive = new Audio(URL.createObjectURL(new Blob([b], { type: 'audio/wav' })));
+        keepAlive.loop = true; keepAlive.setAttribute('playsinline', '');
+      }
+      keepAlive.play().catch(() => {});
+    };
+    const set = want => {
+      if (!ctx) build();
+      on = want;
+      if (on) unmuteIOS(); else if (keepAlive) keepAlive.pause();
+      if (ctx.state === 'suspended') ctx.resume();
+      const t = ctx.currentTime;
+      master.gain.cancelScheduledValues(t);
+      master.gain.setValueAtTime(master.gain.value, t);
+      master.gain.linearRampToValueAtTime(on ? 1 : 0, t + (on ? 3 : .8));
+      btn.setAttribute('aria-pressed', on);
+      btn.classList.toggle('on', on);
+      btn.querySelector('span').textContent = on ? 'Sound on' : 'Sound';
+      clearTimeout(stopping);
+      if (on) music.play().catch(() => {});
+      else stopping = setTimeout(() => music.pause(), 900);
+    };
+    btn.addEventListener('click', () => set(!on));
+    document.addEventListener('click', e => { if (e.target.closest('a, button') && !e.target.closest('#sound, .welcome')) tap(); });
+    document.addEventListener('visibilitychange', () => {
+      if (!ctx || !on) return;
+      if (document.hidden) { music.pause(); ctx.suspend(); } else { ctx.resume(); music.play().catch(() => {}); }
+    });
+
+    // Once a visit a short welcome asks, because only a click may start sound.
+    const ask = done => {
+      let asked = false;
+      try { asked = sessionStorage.getItem('sound-asked') === '1'; } catch (e) {}
+      if (asked) return done();
+      const w = document.createElement('div');
+      w.className = 'welcome';
+      w.setAttribute('role', 'dialog');
+      w.setAttribute('aria-label', 'Welcome');
+      w.innerHTML = '<div><span class="mark">NH</span><p class="welcome-name">Nasiria Haque</p>'
+        + '<p class="welcome-t">Best with sound.</p>'
+        + '<p class="welcome-s">Soft, calm piano plays quietly under this page. Turn it off any time.</p>'
+        + '<div class="welcome-go"><button type="button" class="btn solid" data-sound="1">Enter with sound</button>'
+        + '<button type="button" class="btn ghost" data-sound="0">Enter quietly</button></div></div>';
+      document.body.append(w);
+      requestAnimationFrame(() => w.classList.add('shown'));
+      w.addEventListener('click', e => {
+        const b = e.target.closest('button[data-sound]');
+        if (!b) return;
+        try { sessionStorage.setItem('sound-asked', '1'); } catch (er) {}
+        if (b.dataset.sound === '1') set(true);
+        w.classList.add('gone');
+        setTimeout(() => w.remove(), 800);
+        done();
+      });
+      w.querySelector('[data-sound="1"]').focus({ preventScroll: true });
+    };
+    return { tap, chime, drag, ask };
+  })();
+
   const portrait = document.getElementById('pframe');
   document.getElementById('p-idea').append(document.getElementById('p-real').firstElementChild.cloneNode(true));
 
@@ -61,14 +170,13 @@
   };
 
   let touched = false;
-  const setX = dragLine(hero, grip, () => { touched = true; hero.classList.remove('hint'); }, x => phone((98 - x) / .96));
+  const setX = dragLine(hero, grip, () => { touched = true; hero.classList.remove('hint'); }, x => { phone((98 - x) / .96); if (touched) sfx.drag(x); });
   dragLine(portrait, document.getElementById('p-grip'), () => {})(50);
 
   // The page opens as pure sketch, then the line wipes the real thing in.
-  if (calm) setX(REST);
-  else {
-    setX(100);
-    const start = performance.now() + 700, span = 1900;
+  const sweep = () => {
+    if (calm) return setX(REST);
+    const start = performance.now() + 500, span = 1900;
     const run = now => {
       if (touched) return;
       const t = Math.min(1, Math.max(0, (now - start) / span));
@@ -76,7 +184,8 @@
       if (t < 1) requestAnimationFrame(run); else hero.classList.add('hint');
     };
     requestAnimationFrame(run);
-  }
+  };
+  setX(calm ? REST : 98);
 
   // The phone leans towards the pointer.
   if (!calm && matchMedia('(hover: hover)').matches) {
@@ -87,6 +196,21 @@
     });
     hero.addEventListener('pointerleave', () => { hero.style.setProperty('--rx', '0deg'); hero.style.setProperty('--ry', '0deg'); });
   }
+
+  // The tap scene leans with the pointer, and rings once it's reached.
+  const go = document.querySelector('.go');
+  if (!calm && matchMedia('(hover: hover)').matches) {
+    go.addEventListener('pointerenter', () => sfx.chime());
+    go.addEventListener('pointermove', e => {
+      const r = go.getBoundingClientRect();
+      go.style.setProperty('--tilty', ((e.clientX - r.left) / r.width - .5) * 26 + 'deg');
+      go.style.setProperty('--tiltx', ((e.clientY - r.top) / r.height - .5) * -18 + 'deg');
+    });
+    go.addEventListener('pointerleave', () => { go.style.setProperty('--tilty', '0deg'); go.style.setProperty('--tiltx', '0deg'); });
+  }
+  if (calm) document.querySelectorAll('video').forEach(v => { v.removeAttribute('autoplay'); v.pause(); });
+
+  sfx.ask(sweep);
 
   // Sketch mode: the whole site goes back to pencil.
   const mode = document.getElementById('mode');
@@ -128,7 +252,8 @@
   document.getElementById('idea-form').addEventListener('submit', e => {
     e.preventDefault();
     const idea = input.value.trim() || input.placeholder;
-    location.href = 'mailto:hello@example.com?subject=' + encodeURIComponent('An idea') + '&body=' + encodeURIComponent(idea);
+    sfx.chime();
+    location.href = 'mailto:nasiriahaque@icloud.com?subject=' + encodeURIComponent('An idea') + '&body=' + encodeURIComponent(idea);
   });
 
   // Reveal on scroll, and the path line fills as you go.

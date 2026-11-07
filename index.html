@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Mara Vale: designer, UI/UX, developer</title>
+<title>Nasiria Haque: designer, UI/UX, developer</title>
 <meta name="description" content="Designer, UI/UX designer and developer. I take your idea from imagination to launch.">
 <meta name="theme-color" content="#4a0813">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -15,15 +15,16 @@
 <!-- The pencil: everything in "idea" state runs through this wobble. -->
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <filter id="pencil"><feTurbulence type="fractalNoise" baseFrequency=".035" numOctaves="2" seed="4"/><feDisplacementMap in="SourceGraphic" scale="3.2"/></filter>
-  <filter id="rough"><feTurbulence type="fractalNoise" baseFrequency=".12" numOctaves="2" seed="9"/><feDisplacementMap in="SourceGraphic" scale="1.8"/></filter>
+  <filter id="rough"><feTurbulence type="fractalNoise" baseFrequency=".12" numOctaves="2" seed="9"/><feDisplacementMap in="SourceGraphic" scale="1"/></filter>
 </svg>
 
 <header class="top">
   <div class="wrap bar">
-    <a class="brand" href="#hero"><span class="mark">MV</span>Mara Vale</a>
+    <a class="brand" href="#hero"><span class="mark">NH</span>Nasiria Haque</a>
     <nav class="links" aria-label="Main">
       <a href="#lenses">What I do</a><a href="#work">Work</a><a href="#path">How it moves</a><a href="#about">About</a>
     </nav>
+    <button class="sound-btn" id="sound" type="button" aria-pressed="false" title="Sound"><i aria-hidden="true"><b></b><b></b><b></b></i><span>Sound</span></button>
     <button class="mode" id="mode" type="button" aria-pressed="false"><span class="dot"></span><span class="mode-label">Sketch mode</span></button>
     <a class="btn small solid" href="#idea">Start a project</a>
   </div>
@@ -98,16 +99,16 @@
         <div class="lens-stage">
           <div class="panel" id="p-design" role="tabpanel" aria-labelledby="t-design">
             <div class="spec">
-              <span class="spec-btn">Book a call<i class="m m-h">56 px</i><i class="m m-r">14 px radius</i></span>
+              <span class="spec-btn">Send your idea<i class="m m-h">56 px</i><i class="m m-r">14 px radius</i></span>
               <div class="swatches"><span style="--c:#4a0813">#4A0813</span><span style="--c:#7a1022">#7A1022</span><span style="--c:#f5efe4;--t:#4a0813">#F5EFE4</span></div>
               <p class="aa">Aa<small>Heavy, rough, a little antique. Loud on purpose.</small></p>
             </div>
           </div>
           <div class="panel" id="p-ux" role="tabpanel" aria-labelledby="t-ux" hidden>
             <div class="flow">
-              <div class="step"><span>1</span>Sees the offer</div>
-              <div class="step"><span>2</span>Picks a time</div>
-              <div class="step"><span>3</span>Booked</div>
+              <div class="step"><span>1</span>Sees the work</div>
+              <div class="step"><span>2</span>Shares the idea</div>
+              <div class="step"><span>3</span>Gets a plan</div>
               <i class="tap"></i>
             </div>
             <p class="flow-note">Three taps. No account. If someone stops halfway, the design failed, not them.</p>
@@ -136,6 +137,7 @@ hero.style.setProperty(<span class="s">'--x'</span>, x + <span class="s">'%'</sp
       <!-- Placeholders: swap in real projects. -->
       <div class="grid">
         <a class="tile one shayi reveal" href="https://shayimasters.com/" rel="noopener">
+          <video class="side" autoplay muted loop playsinline disablepictureinpicture preload="metadata" poster="media/shayi-boxes.webp" aria-label="The Shayi Masters boxes turning past, one after another"><source src="media/shayi-boxes.mp4" type="video/mp4"></video>
           <span class="boxes">
             <img class="elephant" src="img/shayi-elephant.webp" alt="Shayi Masters Africa's Special Tea box, yellow with an elephant" loading="lazy">
             <img class="lion" src="img/shayi-lion.webp" alt="Shayi Masters Power Tea for Men box, golden with a lion" loading="lazy">
@@ -144,7 +146,14 @@ hero.style.setProperty(<span class="s">'--x'</span>, x + <span class="s">'%'</sp
         </a>
         <a class="tile two-up go reveal" href="https://go.vesopa.com/" rel="noopener">
           <span class="status"><i></i>Running · in testing on Google Play and the App Store</span>
-          <img src="img/go-sale.webp" alt="Vesopa Go showing a sale on an iPhone" loading="lazy">
+          <span class="scene" role="img" aria-label="Vesopa Go: a card tapping a phone to pay £24.50">
+            <span class="scene-in">
+              <span class="lockup"><img src="img/go-mark.png" alt="" width="40" height="40"><b>Vesopa <em>Go</em></b></span>
+              <span class="tphone"><small>TAP TO PAY</small><strong>£24.50</strong><i class="nfc"></i></span>
+              <span class="waves"><i></i><i></i></span>
+              <span class="tcard"><i></i><small>···· 4242</small></span>
+            </span>
+          </span>
           <div><h3>Vesopa Go</h3><p>The till in your hand: tables, kitchen and payments on phone and tablet.</p><span>go.vesopa.com ↗</span></div>
         </a>
         <article class="tile three social reveal">
@@ -166,7 +175,7 @@ hero.style.setProperty(<span class="s">'--x'</span>, x + <span class="s">'%'</sp
         <h2>Your project moves. <br>Every week.</h2>
       </div>
       <ol class="path" id="path-list">
-        <li class="reveal"><b>Spark</b><p>We talk. You leave with a clear one-page plan.</p></li>
+        <li class="reveal"><b>Spark</b><p>You send the idea. You get a clear one-page plan back.</p></li>
         <li class="reveal"><b>Sketch</b><p>Rough screens, fast. Bad ideas die early and cheap.</p></li>
         <li class="reveal"><b>Shape</b><p>The real look, the real journey. Tap through it before a line is built.</p></li>
         <li class="reveal"><b>Ship</b><p>I build it. I launch it. I stay for what comes next.</p></li>
@@ -212,7 +221,7 @@ hero.style.setProperty(<span class="s">'--x'</span>, x + <span class="s">'%'</sp
       <div class="reveal">
         <p class="eyebrow">Who's holding the pencil</p>
         <h2>I start where <br>the page is blank.</h2>
-        <p class="lead">I'm Mara. I draw things that don't exist yet, then I build them. Hire me and the person who sketched it is the person who ships it.</p>
+        <p class="lead">I'm Nasiria. I draw things that don't exist yet, then I build them. Hire me and the person who sketched it is the person who ships it.</p>
         <ul class="facts">
           <li>Odd fact one</li><li>Odd fact two</li><li>Odd fact three</li>
         </ul>
@@ -230,6 +239,15 @@ hero.style.setProperty(<span class="s">'--x'</span>, x + <span class="s">'%'</sp
           <input id="idea-text" maxlength="90" autocomplete="off" placeholder="An app that tells me when my bus is lying">
           <button class="btn solid" type="submit">Send me this idea</button>
         </form>
+        <div class="reach">
+          <a class="mail" href="mailto:nasiriahaque@icloud.com">nasiriahaque@icloud.com</a>
+          <span class="socials">
+            <a href="https://www.facebook.com/share/19t5wa8hsp/" rel="noopener">Facebook</a>
+            <a href="https://www.instagram.com/nasiriahoque" rel="noopener">Instagram</a>
+            <a href="https://x.com/inashaque" rel="noopener">X</a>
+            <a href="https://www.linkedin.com/in/nasiria-haque-21aa02449" rel="noopener">LinkedIn</a>
+          </span>
+        </div>
       </div>
       <div class="cards reveal" aria-hidden="true">
         <div class="ticket sketchy"><small id="idea-verdict">your idea, today</small><p class="i-text"></p></div>
