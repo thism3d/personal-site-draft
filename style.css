@@ -62,7 +62,15 @@ h1 a { text-decoration: none; }
 .cap b { font-size: 21px; text-transform: uppercase; }
 .cap .two a { margin-left: 12px; }
 .note { margin: 2px 0 0; font-size: 18px; line-height: 1.35; opacity: .85; }
-.plate { display: grid; place-items: center; background: var(--plate); color: var(--on-plate); font: 46px/1 "IM Fell Double Pica SC", serif; }
+.plate-art { width: 100%; height: 100%; }
+.plate-art * { fill: none; stroke: var(--ink); stroke-width: 1.2; }
+.plate-art pattern path { stroke-width: .9; }
+.plate-art .thin { stroke-width: .7; }
+.plate-art .dot { fill: var(--ink); stroke: none; }
+.plate-art rect[fill] { fill: var(--pat); stroke: none; }
+.plate-art text { stroke: none; fill: var(--mark); text-anchor: middle; font-family: "IM Fell Double Pica SC", serif; }
+.plate-art .pname { font-size: 44px; }
+.plate-art .pcap { font-size: 19px; fill: var(--ink); }
 
 .chapters { list-style: none; margin: 12px 0 0; padding: 0; counter-reset: c; }
 .chapters li { counter-increment: c; padding: 18px 0; border-top: 1px dotted var(--faint); }
